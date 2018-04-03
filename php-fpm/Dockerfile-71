@@ -1,0 +1,59 @@
+#
+#--------------------------------------------------------------------------
+# Image Setup
+#--------------------------------------------------------------------------
+#
+
+
+FROM php:7.1-fpm
+
+MAINTAINER ykq <379395979@qq.com>
+
+
+
+
+#####################################
+# Opcache:
+#####################################
+
+ARG INSTALL_OPCACHE=false
+RUN if [ ${INSTALL_OPCACHE} = true ]; then \
+    docker-php-ext-install opcache \
+;fi
+
+
+
+
+
+
+
+
+
+
+#####################################
+# Check PHP version:
+#####################################
+
+RUN php -v | head -n 1 | grep -q "PHP 7.1."
+
+#
+#--------------------------------------------------------------------------
+# Final Touch
+#--------------------------------------------------------------------------
+#
+
+
+# 复制
+# ADD ./laravel.ini /usr/local/etc/php/conf.d
+# ADD ./xlaravel.pool.conf /usr/local/etc/php-fpm.d/
+
+#RUN rm -r /var/lib/apt/lists/*
+
+#RUN usermod -u 1000 www
+
+
+WORKDIR /var/www
+
+CMD ["php-fpm"]
+
+EXPOSE 9000

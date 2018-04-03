@@ -1,0 +1,48 @@
+2018/04/02 06:01:44 [error] 6#6: *14 FastCGI sent in stderr: "PHP message: PHP Warning:  phpinfo(): It is not safe to rely on the system's timezone settings. You are *required* to use the date.timezone setting or the date_default_timezone_set() function. In case you used any of those methods and you are still getting this warning, you most likely misspelled the timezone identifier. We selected the timezone 'UTC' for now, but please set date.timezone to select your timezone. in /var/www/xqw/index.php on line 2" while reading response header from upstream, client: 172.19.0.1, server: xqw.test.com, request: "GET /index.php HTTP/1.1", upstream: "fastcgi://172.19.0.3:9000", host: "xqw.test.com"
+2018/04/02 06:02:37 [error] 6#6: *16 FastCGI sent in stderr: "PHP message: PHP Parse error:  syntax error, unexpected ':' in /var/www/xqw/index.php on line 2" while reading response header from upstream, client: 172.19.0.1, server: xqw.test.com, request: "GET /index.php HTTP/1.1", upstream: "fastcgi://172.19.0.3:9000", host: "xqw.test.com"
+2018/04/02 06:04:36 [error] 6#6: *20 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught exception 'Think\Exception' with message '系统不支持:mysql' in /var/www/xqw/sns/ThinkPHP/Common/functions.php:105
+Stack trace:
+#0 /var/www/xqw/sns/ThinkPHP/Library/Think/Db/Driver/Mysql.class.php(27): E('\xE7\xB3\xBB\xE7\xBB\x9F\xE4\xB8\x8D\xE6\x94\xAF\xE6\x8C\x81...')
+#1 /var/www/xqw/sns/ThinkPHP/Library/Think/Db.class.php(90): Think\Db\Driver\Mysql->__construct(Array)
+#2 /var/www/xqw/sns/ThinkPHP/Library/Think/Db.class.php(65): Think\Db->factory('')
+#3 /var/www/xqw/sns/ThinkPHP/Library/Think/Model.class.php(1499): Think\Db::getInstance('')
+#4 /var/www/xqw/sns/ThinkPHP/Library/Think/Model.class.php(99): Think\Model->db(0, '', true)
+#5 /var/www/xqw/sns/ThinkPHP/Common/functions.php(621): Think\Model->__construct('Module')
+#6 /var/www/xqw/sns/ThinkPHP/Library/Think/Controller.class.php(70): D('Common/Module')
+#7 /var/www/xqw/sns/Application/Common/Common/api.php(71): Think\Controller->__construct()
+#8 /var/www/xqw/sns/Application/Common/Common/api.php(45): api_s" while reading response header from upstream, client: 172.19.0.1, server: xqw.test.com, request: "GET /sns/ HTTP/1.1", upstream: "fastcgi://172.19.0.3:9000", host: "xqw.test.com"
+2018/04/02 06:05:47 [error] 6#6: *25 FastCGI sent in stderr: "PHP message: PHP Warning:  phpinfo(): It is not safe to rely on the system's timezone settings. You are *required* to use the date.timezone setting or the date_default_timezone_set() function. In case you used any of those methods and you are still getting this warning, you most likely misspelled the timezone identifier. We selected the timezone 'UTC' for now, but please set date.timezone to select your timezone. in /var/www/xqw/index.php on line 2" while reading response header from upstream, client: 172.19.0.1, server: xqw.test.com, request: "GET / HTTP/1.1", upstream: "fastcgi://172.19.0.3:9000", host: "xqw.test.com"
+2018/04/02 06:07:19 [error] 6#6: *32 FastCGI sent in stderr: "PHP message: PHP Warning:  mkdir(): No such file or directory in /var/www/xqw/system/cache/CacheFileService.php on line 44
+PHP message: PHP Warning:  mkdir(): No such file or directory in /var/www/xqw/system/cache/CacheFileService.php on line 44
+PHP message: PHP Warning:  mkdir(): No such file or directory in /var/www/xqw/system/cache/CacheFileService.php on line 44" while reading response header from upstream, client: 172.19.0.1, server: xqw.test.com, request: "GET / HTTP/1.1", upstream: "fastcgi://172.19.0.3:9000", host: "xqw.test.com"
+2018/04/02 06:21:05 [error] 6#6: *104 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Call to undefined function mysql_connect() in /var/www/xqw/system/db/db.php on line 76" while reading response header from upstream, client: 172.19.0.1, server: xqw.test.com, request: "GET / HTTP/1.1", upstream: "fastcgi://172.19.0.3:9000", host: "xqw.test.com"
+2018/04/02 06:21:39 [error] 6#6: *107 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Call to undefined function mysql_connect() in /var/www/xqw/system/db/db.php on line 76" while reading response header from upstream, client: 172.19.0.1, server: xqw.test.com, request: "GET / HTTP/1.1", upstream: "fastcgi://172.19.0.3:9000", host: "xqw.test.com"
+2018/04/02 06:21:54 [error] 6#6: *107 FastCGI sent in stderr: "PHP message: PHP Warning:  phpinfo(): It is not safe to rely on the system's timezone settings. You are *required* to use the date.timezone setting or the date_default_timezone_set() function. In case you used any of those methods and you are still getting this warning, you most likely misspelled the timezone identifier. We selected the timezone 'UTC' for now, but please set date.timezone to select your timezone. in /var/www/xqw/index.php on line 6" while reading response header from upstream, client: 172.19.0.1, server: xqw.test.com, request: "GET / HTTP/1.1", upstream: "fastcgi://172.19.0.3:9000", host: "xqw.test.com"
+2018/04/02 06:22:10 [error] 6#6: *113 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Call to undefined function mysql_connect() in /var/www/xqw/system/db/db.php on line 76" while reading response header from upstream, client: 172.19.0.1, server: xqw.test.com, request: "GET / HTTP/1.1", upstream: "fastcgi://172.19.0.3:9000", host: "xqw.test.com"
+2018/04/02 06:41:23 [error] 5#5: *1 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught exception 'Exception' with message 'could not find driver' in /var/www/xqw/app/Helpers/DB.php:257
+Stack trace:
+#0 /var/www/xqw/app/Helpers/DB.php(148): DatabaseDirver->__construct(Array)
+#1 /var/www/xqw/app/Helpers/DB.php(97): DatabaseDirver::getInstance(Array)
+#2 /var/www/xqw/app/Lib/opensns.php(25): DB::connect('opensns')
+#3 /var/www/xqw/system/template/template.php(1243) : eval()'d code(349): sns_getNewsList('', 'n.position in (...', '5')
+#4 /var/www/xqw/system/template/template.php(1243): eval()
+#5 /var/www/xqw/system/template/template.php(316): AppTemplate->_eval('<?php echo $thi...')
+#6 /var/www/xqw/system/template/template.php(127): AppTemplate->make_compiled('/var/www/xqw/ap...')
+#7 /var/www/xqw/system/template/template.php(247): AppTemplate->fetch('page/index.html', '')
+#8 /var/www/xqw/app/Lib/module/indexModule.class.php(130): AppTemplate->display('page/index.html')
+#9 /var/www/xqw/app/Lib/SiteApp.class.php(52): indexModule->index()
+#10 /var/www/xqw/index" while reading response header from upstream, client: 172.19.0.1, server: xqw.test.com, request: "GET / HTTP/1.1", upstream: "fastcgi://172.19.0.3:9000", host: "xqw.test.com"
+2018/04/02 06:41:31 [error] 5#5: *1 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught exception 'Exception' with message 'could not find driver' in /var/www/xqw/app/Helpers/DB.php:257
+Stack trace:
+#0 /var/www/xqw/app/Helpers/DB.php(148): DatabaseDirver->__construct(Array)
+#1 /var/www/xqw/app/Helpers/DB.php(97): DatabaseDirver::getInstance(Array)
+#2 /var/www/xqw/app/Lib/opensns.php(25): DB::connect('opensns')
+#3 /var/www/xqw/system/template/template.php(1243) : eval()'d code(349): sns_getNewsList('', 'n.position in (...', '5')
+#4 /var/www/xqw/system/template/template.php(1243): eval()
+#5 /var/www/xqw/system/template/template.php(316): AppTemplate->_eval('<?php echo $thi...')
+#6 /var/www/xqw/system/template/template.php(127): AppTemplate->make_compiled('/var/www/xqw/ap...')
+#7 /var/www/xqw/system/template/template.php(247): AppTemplate->fetch('page/index.html', '')
+#8 /var/www/xqw/app/Lib/module/indexModule.class.php(130): AppTemplate->display('page/index.html')
+#9 /var/www/xqw/app/Lib/SiteApp.class.php(52): indexModule->index()
+#10 /var/www/xqw/index" while reading response header from upstream, client: 172.19.0.1, server: xqw.test.com, request: "GET /public/runtime/app/lang.js HTTP/1.1", upstream: "fastcgi://172.19.0.3:9000", host: "xqw.test.com", referrer: "http://xqw.test.com/"
+2018/04/02 07:19:13 [error] 8#8: *10 open() "/var/www/xqw/favicon.ico" failed (2: No such file or directory), client: 172.19.0.1, server: xqw.test.com, request: "GET /favicon.ico HTTP/1.1", host: "xqw.test.com", referrer: "http://xqw.test.com/sns/forum"
