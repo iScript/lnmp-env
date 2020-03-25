@@ -11,7 +11,7 @@ services:
       - ./php-fpm/php${PHP_VERSION}.ini:/usr/local/etc/php/php.ini
 
       # 和下面nginx一样
-      - /private/var/app/www:/var/www
+      - /Users/edz/Desktop/code:/var/www
     networks:
       - backend
 
@@ -31,7 +31,7 @@ services:
       - ${NGINX_SITES_PATH}:/etc/nginx/sites-available
       
       # 将www挂载到 ， laradocker是利用volumes_from .
-      - /private/var/app/www:/var/www
+      - /Users/edz/Desktop/code:/var/www
     depends_on:
       - php-fpm
     networks:
