@@ -1,17 +1,27 @@
 version: '3'
-services:
-  
 
+volumes:
+  elasticsearch:
+    driver: ${VOLUMES_DRIVER}
+
+
+services:
 ### PHP-FPM Container #######################################  
   php-fpm:
     build:
       context: ./php-fpm
-      dockerfile: "Dockerfile-${PHP_VERSION}"
+      args:
+        - PHP_VERSION=${PHP_VERSION}
+        - CHANGE_SOURCE=${CHANGE_SOURCE}
+        - INSTALL_OPCACHE=${PHP_FPM_INSTALL_OPCACHE}
+        - INSTALL_PHPREDIS=${PHP_FPM_INSTALL_PHPREDIS}
+      #dockerfile: "Dockerfile-${PHP_VERSION}"
     volumes:
       - ./php-fpm/php${PHP_VERSION}.ini:/usr/local/etc/php/php.ini
 
       # 和下面nginx一样
-      - /Users/edz/Desktop/code:/var/www
+      # - /Users/edz/Desktop/code:/var/www
+      - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
     networks:
       - backend
 
@@ -21,6 +31,7 @@ services:
     build:
       context: ./nginx
       args:
+        - CHANGE_SOURCE=${CHANGE_SOURCE}
         - PHP_UPSTREAM_CONTAINER=${NGINX_PHP_UPSTREAM_CONTAINER}
         - PHP_UPSTREAM_PORT=${NGINX_PHP_UPSTREAM_PORT}
     ports:
@@ -30,8 +41,9 @@ services:
       - ${NGINX_HOST_LOG_PATH}:/var/log/nginx
       - ${NGINX_SITES_PATH}:/etc/nginx/sites-available
       
-      # 将www挂载到 ， laradocker是利用volumes_from .
-      - /Users/edz/Desktop/code:/var/www
+      # 将本地代码挂在到容器
+      # - /Users/edz/Desktop/code:/var/www
+      - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
     depends_on:
       - php-fpm
     networks:
@@ -70,6 +82,32 @@ services:
       networks:
         - backend
   
+
+### ElasticSearch ########################################
+  elasticsearch:
+    build:
+      context: ./elasticsearch
+      args:
+        - ELK_VERSION=${ELK_VERSION}
+    volumes:
+      # 卷标 docker volume ls 
+      - elasticsearch:/usr/share/elasticsearch/data
+    environment:
+      - cluster.name=yy-cluster
+      - node.name=yy-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - cluster.initial_master_nodes=yy-node
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - "${ELASTICSEARCH_HOST_HTTP_PORT}:9200"
+      - "${ELASTICSEARCH_HOST_TRANSPORT_PORT}:9300"
+    networks:
+      - frontend
+      - backend
 
 
 ### Networks Setup ############################################

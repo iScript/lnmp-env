@@ -123,3 +123,5 @@ Stack trace:
 #8 /var/www/onlinesale/index.php(6): require('/var/www/online...')
 #9 {main}
   thrown in /var/www/onlinesale/framework/class/db.class.php on line 55" while reading response header from upstream, client: 172.28.0.1, server: zbshop.com, request: "GET / HTTP/1.1", upstream: "fastcgi://172.28.0.4:9000", host: "zbshop.com"
+2020/04/25 07:40:52 [emerg] 1#1: invalid parameter "live.com" in /etc/nginx/sites-available/live.conf:3
+2020/04/25 07:41:57 [emerg] 1#1: invalid parameter "live.com" in /etc/nginx/sites-available/live.conf:3

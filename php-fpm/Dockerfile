@@ -4,13 +4,21 @@
 #--------------------------------------------------------------------------
 #
 
+ARG PHP_VERSION
 
-FROM php:7.1-fpm
+FROM php:${PHP_VERSION}-fpm
 
 MAINTAINER ykq <379395979@qq.com>
 
 
-
+# If you're in China, or you need to change sources, will be set CHANGE_SOURCE to true in .env.
+ARG CHANGE_SOURCE=false
+RUN if [ ${CHANGE_SOURCE} = true ]; then \
+    # Change application source from deb.debian.org to aliyun source
+    sed -i 's/deb.debian.org/mirrors.tuna.tsinghua.edu.cn/' /etc/apt/sources.list && \
+    sed -i 's/security.debian.org/mirrors.tuna.tsinghua.edu.cn/' /etc/apt/sources.list && \
+    sed -i 's/security-cdn.debian.org/mirrors.tuna.tsinghua.edu.cn/' /etc/apt/sources.list \
+;fi
 
 run apt-get update && apt-get install -y \
         libfreetype6-dev \
@@ -36,6 +44,7 @@ RUN docker-php-ext-install mysqli
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install gd
 
+
 # Install Redis package:
 ARG INSTALL_REDIS=true
 RUN if [ ${INSTALL_REDIS} = true ]; then \
@@ -54,7 +63,7 @@ RUN if [ ${INSTALL_REDIS} = true ]; then \
 # Check PHP version:
 #####################################
 
-RUN php -v | head -n 1 | grep -q "PHP 7.1."
+RUN php -v | head -n 1 | grep -q "PHP 7.2."
 
 #
 #--------------------------------------------------------------------------
