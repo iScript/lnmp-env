@@ -1,0 +1,2 @@
+docker-compose exec {c} bash
+docker-compose up {c}
