@@ -146,6 +146,47 @@ services:
       - frontend
       - backend
 
+### Hadoop Container #########################################
+  hadoop:
+    build: ./hadoop
+    # 
+    container_name: hadoop
+    hostname: hadoop001
+    ports:
+      - '22:22'
+      # api端口
+      - '8020:8020' 
+      - '9000:9000' 
+      # datanode数据传输端口
+      - '9864:9864'  
+      - '9866:9866' 
+      - '9867:9867' 
+      # webui
+      - '9870:9870' 
+      - '8088:8088' 
+      #
+      - '10020:10020' 
+      - '19888:19888'
+      - '8030:8030'
+      - '8031:8031'  
+      - '8032:8032'
+      - '8040:8040'
+      - '8042:8042'    
+      - '8033:8033' 
+      - '9868:9868' 
+      - '13562:13562' 
+      - '32851:32851' 
+    # 防止自动退出
+    stdin_open: true
+    tty: true
+    networks:
+      - backend
+
+### 
+# hadoop:
+#   build: ./hive
+#   depends_on:
+#     - hadoop
 
 
 ### Networks Setup ############################################
