@@ -183,10 +183,16 @@ services:
       - backend
 
 ### 
-# hadoop:
-#   build: ./hive
-#   depends_on:
-#     - hadoop
+  spark:
+    build: ./spark
+    ports:
+      - '4040:4040'
+      - '8080:8080'
+      - '7077:7077'
+    stdin_open: true
+    tty: true
+    networks:
+      - backend
 
 
 ### Networks Setup ############################################
