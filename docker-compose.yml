@@ -194,6 +194,15 @@ services:
     networks:
       - backend
 
+### Tomcat Container #########################################
+  tomcat:
+      build: ./tomcat
+      # volumes:
+      #   - ${DATA_SAVE_PATH}/redis:/data
+      ports:
+        - "8080:8080"
+      networks:
+        - backend
 
 ### Networks Setup ############################################
 networks:
