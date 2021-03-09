@@ -206,6 +206,14 @@ services:
       networks:
         - backend
 
+### Nacos Container #########################################
+  nacos:
+      build: ./nacos
+      ports:
+        - "8848:8848"
+      networks:
+        - backend
+
 ### Networks Setup ############################################
 networks:
   frontend:
