@@ -1,14 +1,27 @@
 server {
 
-    listen 80 default_server;
+    listen 80 ;
+    
 
-    server_name localhost;
-    root /var/www/;
+    server_name csgo.com;
+    root /var/www/csgo-admin/public;
     index index.php index.html index.htm;
-
+    
     location / {
-         try_files $uri $uri/ /index.php$is_args$args;
+        # tp5
+        #开启目录浏览功能
+        #autoindex on;
+        #关闭详细文件大小统计，让文件大小显示MB，GB单位，默认为b
+        #autoindex_exact_size on;
+        #开启以服务器本地时区显示文件修改日期
+        #autoindex_localtime on;
+         if (!-e $request_filename) {
+            rewrite ^/(.*)$ /index.php?s=$1 last;
+        }
     }
+
+   
+
 
     location ~ \.php$ {
         try_files $uri /index.php =404;

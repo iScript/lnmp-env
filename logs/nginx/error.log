@@ -126,3 +126,6 @@ Stack trace:
 2020/04/25 07:40:52 [emerg] 1#1: invalid parameter "live.com" in /etc/nginx/sites-available/live.conf:3
 2020/04/25 07:41:57 [emerg] 1#1: invalid parameter "live.com" in /etc/nginx/sites-available/live.conf:3
 2020/12/23 01:20:57 [emerg] 1#1: duplicate listen options for [::]:80 in /etc/nginx/sites-available/default.conf:4
+2021/07/03 04:52:24 [emerg] 1#1: duplicate listen options for [::]:80 in /etc/nginx/sites-available/default.conf:4
+2021/07/03 04:56:02 [emerg] 1#1: invalid parameter "csgo.com" in /etc/nginx/sites-available/csgo.conf:3
+2021/07/03 04:56:40 [emerg] 1#1: duplicate listen options for [::]:80 in /etc/nginx/sites-available/default.conf:4
