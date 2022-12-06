@@ -4,9 +4,8 @@ volumes:
   elasticsearch:
     driver: ${VOLUMES_DRIVER}
 
-
 services:
-### PHP-FPM Container #######################################  
+  ### PHP-FPM Container #######################################  
   php-fpm:
     build:
       context: ./php-fpm
@@ -25,9 +24,8 @@ services:
     networks:
       - backend
 
-
-### NGINX Server Container ##################################      
-  nginx:  
+  ### NGINX Server Container ##################################      
+  nginx:
     build:
       context: ./nginx
       args:
@@ -42,7 +40,7 @@ services:
     volumes:
       - ${NGINX_HOST_LOG_PATH}:/var/log/nginx
       - ${NGINX_SITES_PATH}:/etc/nginx/sites-available
-      
+
       # 将本地代码挂在到容器
       # - /Users/edz/Desktop/code:/var/www
       - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
@@ -52,7 +50,7 @@ services:
       - frontend
       - backend
 
-### MySQL Container #########################################
+  ### MySQL Container #########################################
   mysql:
     build:
       context: ./mysql
@@ -73,19 +71,17 @@ services:
     networks:
       - backend
 
-
-### Redis Container #########################################
+  ### Redis Container #########################################
   redis:
-      build: ./redis
-      volumes:
-        - ${DATA_SAVE_PATH}/redis:/data
-      ports:
-        - "${REDIS_PORT}:6379"
-      networks:
-        - backend
-  
+    build: ./redis
+    volumes:
+      - ${DATA_SAVE_PATH}/redis:/data
+    ports:
+      - "${REDIS_PORT}:6379"
+    networks:
+      - backend
 
-### ElasticSearch ########################################
+  ### ElasticSearch ########################################
   elasticsearch:
     build:
       context: ./elasticsearch
@@ -112,7 +108,7 @@ services:
       - frontend
       - backend
 
-### Logstash ##############################################
+  ### Logstash ##############################################
   logstash:
     build:
       context: ./logstash
@@ -134,7 +130,7 @@ services:
     depends_on:
       - elasticsearch
 
-### Kibana ##############################################
+  ### Kibana ##############################################
   kibana:
     build:
       context: ./kibana
@@ -148,43 +144,43 @@ services:
       - frontend
       - backend
 
-### Hadoop Container #########################################
+  ### Hadoop Container #########################################
   hadoop:
     build: ./hadoop
-    # 
+    #
     container_name: hadoop
     hostname: hadoop001
     ports:
       - '22:22'
       # api端口
-      - '8020:8020' 
-      - '9000:9000' 
+      - '8020:8020'
+      - '9000:9000'
       # datanode数据传输端口
-      - '9864:9864'  
-      - '9866:9866' 
-      - '9867:9867' 
+      - '9864:9864'
+      - '9866:9866'
+      - '9867:9867'
       # webui
-      - '9870:9870' 
-      - '8088:8088' 
+      - '9870:9870'
+      - '8088:8088'
       #
-      - '10020:10020' 
+      - '10020:10020'
       - '19888:19888'
       - '8030:8030'
-      - '8031:8031'  
+      - '8031:8031'
       - '8032:8032'
       - '8040:8040'
-      - '8042:8042'    
-      - '8033:8033' 
-      - '9868:9868' 
-      - '13562:13562' 
-      - '32851:32851' 
+      - '8042:8042'
+      - '8033:8033'
+      - '9868:9868'
+      - '13562:13562'
+      - '32851:32851'
     # 防止自动退出
     stdin_open: true
     tty: true
     networks:
       - backend
 
-### 
+  ### 
   spark:
     build: ./spark
     ports:
@@ -196,23 +192,23 @@ services:
     networks:
       - backend
 
-### Tomcat Container #########################################
+  ### Tomcat Container #########################################
   tomcat:
-      build: ./tomcat
-      # volumes:
-      #   - ${DATA_SAVE_PATH}/redis:/data
-      ports:
-        - "8081:8081"
-      networks:
-        - backend
+    build: ./tomcat
+    # volumes:
+    #   - ${DATA_SAVE_PATH}/redis:/data
+    ports:
+      - "8081:8081"
+    networks:
+      - backend
 
-### Nacos Container #########################################
+  ### Nacos Container #########################################
   nacos:
-      build: ./nacos
-      ports:
-        - "8848:8848"
-      networks:
-        - backend
+    build: ./nacos
+    ports:
+      - "8848:8848"
+    networks:
+      - backend
 
 ### Networks Setup ############################################
 networks:
@@ -220,4 +216,3 @@ networks:
     driver: "bridge"
   backend:
     driver: "bridge"
-    

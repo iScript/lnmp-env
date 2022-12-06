@@ -7,7 +7,7 @@
 ARG PHP_VERSION
 
 FROM php:${PHP_VERSION}-fpm
-
+#FROM laradock/php-fpm:latest-7.3
 MAINTAINER ykq <379395979@qq.com>
 
 
@@ -73,23 +73,28 @@ RUN if [ ${INSTALL_OPCACHE} = true ]; then \
 RUN docker-php-ext-install mysqli 
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install gd
+RUN docker-php-ext-enable gd
 RUN docker-php-ext-install sockets
+RUN docker-php-ext-install pcntl
+RUN docker-php-ext-install bcmath 
+#RUN docker-php-ext-install event
+
 
 
 # Install Redis package:
 ARG INSTALL_REDIS=true
 RUN if [ ${INSTALL_REDIS} = true ]; then \
 
-  # Install Redis Extension
-  # pecl -vvv install -o -f redis \
-  # &&  rm -rf /tmp/pear \
-  # &&  docker-php-ext-enable redis \
-  # 
+  #Install Redis Extension
+  pecl -vvv install -o -f redis \
+  &&  rm -rf /tmp/pear \
+  &&  docker-php-ext-enable redis \
 
-  mkdir -p /usr/src/php/ext/redis \
-  && curl -L https://github.com/phpredis/phpredis/archive/5.3.4.tar.gz | tar xvz -C /usr/src/php/ext/redis --strip 1 \
-  && echo 'redis' >> /usr/src/php-available-exts \
-  && docker-php-ext-install redis \
+
+  # mkdir -p /usr/src/php/ext/redis \
+  # && curl -L https://github.com/phpredis/phpredis/archive/3.1.2.tar.gz | tar xvz -C /usr/src/php/ext/redis --strip 1 \
+  # && echo 'redis' >> /usr/src/php-available-exts \
+  # && docker-php-ext-install redis \
 
   ;fi
 
@@ -102,7 +107,7 @@ RUN if [ ${INSTALL_REDIS} = true ]; then \
 # Check PHP version:
 #####################################
 
-RUN php -v | head -n 1 | grep -q "PHP 7.3."
+#RUN php -v | head -n 1 | grep -q "PHP 7.3."
 
 #
 #--------------------------------------------------------------------------

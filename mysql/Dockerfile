@@ -1,5 +1,5 @@
 #ARG MYSQL_VERSION=latest
-FROM mysql:5.7
+FROM mysql/mysql-server:5.7
 
 #####################################
 # Set Timezone
