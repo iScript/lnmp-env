@@ -227,6 +227,19 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     networks:
       - backend
+  
+  postgrest:
+    image: postgrest/postgrest
+    ports:
+      - "3008:3000"
+    environment:
+      PGRST_DB_URI: postgres://test:password@postgres:5432/test2
+      PGRST_DB_ANON_ROLE: test
+      PGRST_JWT_SECRET : e10adc3949ba59abbe56e057f20f883e
+    depends_on:
+      - postgres
+    networks:
+      - backend
 
 ### Networks Setup ############################################
 networks:
